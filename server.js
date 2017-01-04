@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-
+const viewsPath = '/views';
 
 
 
@@ -10,7 +10,7 @@ const path = require('path');
 
 function handleBadRequest(req, res) {
     let filePromise = new Promise((resolve, reject) => {
-        let errTemplatePath = path.join(__dirname, '/error.html');
+        let errTemplatePath = path.join(__dirname, viewsPath, '/error.html');
         fs.readFile(errTemplatePath, (err, fileContent) => {
             if (err) {
                 reject(err);
@@ -36,7 +36,7 @@ function handleBadRequest(req, res) {
 
 function handleNotFound(req, res) {
     let filePromise = new Promise((resolve, reject) => {
-        let notFoundTemplatePath = path.join(__dirname, '/404.html');
+        let notFoundTemplatePath = path.join(__dirname, viewsPath, '/404.html');
         fs.readFile(notFoundTemplatePath, (err, fileContent) => {
             if (err) {
                 reject(err);
@@ -67,7 +67,7 @@ function requestHandler(req, res) {
 
     switch (req.url) {
         case '/':
-            fs.readFile(path.join(__dirname, '/index.html'), (err, data) => {
+            fs.readFile(path.join(__dirname, viewsPath, '/index.html'), (err, data) => {
                 if (err) {
                     throw err;
                 }
